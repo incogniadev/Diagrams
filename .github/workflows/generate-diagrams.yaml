@@ -23,14 +23,39 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
-      - name: Export drawio files to PNG
-        uses: rlespinasse/drawio-export-action@v2
         with:
-          path: src/
-          remove-page-suffix: true
-          output: public/
-          format: png
+          fetch-depth: 0
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Install draw.io CLI
+        run: |
+          npm install -g @mermaid-js/mermaid-cli
+          npm install -g drawio-batch
+      
+      - name: Export drawio files to PNG
+        run: |
+          mkdir -p public
+          find src -name "*.drawio" | while read file; do
+            # Get relative path and create output directory structure
+            rel_path=${file#src/}
+            output_dir="public/$(dirname "$rel_path")"
+            mkdir -p "$output_dir"
+            
+            # Convert to PNG
+            filename=$(basename "$file" .drawio)
+            output_file="$output_dir/$filename.png"
+            
+            # Use drawio desktop in headless mode
+            docker run --rm -v "$PWD:/workspace" \
+              ghcr.io/jgraph/drawio-desktop:latest \
+              --crop --export --format png \
+              --output "/workspace/$output_file" \
+              "/workspace/$file" || echo "Failed to convert $file, skipping..."
+          done
           
       - name: Generate simple index page
         run: |

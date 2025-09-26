@@ -9,3 +9,4 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.
 
 - feat: configuración inicial del sistema de generación automatizada de diagramas con GitHub Actions y Pages para integración con Confluence
 - fix: simplificación del workflow de GitHub Actions para optimizar velocidad y confiabilidad del despliegue
+- fix: resolución de error de repositorio shallow y cambio a solución Docker más confiable
