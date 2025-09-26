@@ -1,268 +1,117 @@
-<mxfile host="Electron" modified="2025-09-26T18:54:31.000Z" agent="Mozilla/5.0" version="25.0.2" etag="kafka-architecture-1.0" type="device">
-  <diagram id="kafka-talos-arch" name="Kafka Talos Architecture">
-    <mxGraphModel dx="2074" dy="1196" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
+  <diagram id="kafka-talos-arch" name="Kafka Talos Architecture - Clean">
+    <mxGraphModel dx="4626" dy="1187" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        
-        <!-- Proxmox Infrastructure -->
-        <mxCell id="proxmox-layer" value="Proxmox VE Infrastructure" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#666666;fontSize=16;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
-          <mxGeometry x="50" y="50" width="1550" height="1050" as="geometry" />
+        <mxCell id="proxmox-layer" value="Proxmox VE Infrastructure" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#666666;fontSize=16;fontStyle=1;verticalAlign=top;spacingTop=10;fontColor=#000000;arcSize=4;" parent="1" vertex="1">
+          <mxGeometry x="40" y="40" width="1560" height="1080" as="geometry" />
         </mxCell>
-        
-        <!-- Talos Cluster Container -->
-        <mxCell id="talos-cluster" value="Talos Linux Kubernetes Cluster v1.33.3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0277bd;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
-          <mxGeometry x="100" y="120" width="1450" height="950" as="geometry" />
+        <mxCell id="talos-cluster" value="Talos Linux Kubernetes Cluster v1.33.3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0277bd;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;fontColor=#000000;arcSize=4;" parent="1" vertex="1">
+          <mxGeometry x="90" y="90" width="1460" height="980" as="geometry" />
         </mxCell>
-        
-        <!-- Control Plane Node -->
-        <mxCell id="cp-node" value="talos-kafka-cp-108&#xa;Control Plane&#xa;172.20.102.8&#xa;8 vCPU / 8GB RAM / 128GB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcdd2;strokeColor=#d32f2f;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="cp-node" value="talos-kafka-cp-108&#xa;Control Plane&#xa;172.20.102.8&#xa;8 vCPU / 8GB RAM / 128GB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcdd2;strokeColor=#d32f2f;fontSize=12;fontStyle=1;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="150" y="180" width="160" height="80" as="geometry" />
         </mxCell>
-        
-        <!-- Worker Nodes -->
-        <mxCell id="wk1-node" value="talos-kafka-wk-109&#xa;Worker 1&#xa;172.20.102.9&#xa;16 vCPU / 16GB RAM / 256GB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#388e3c;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="wk1-node" value="talos-kafka-wk-109&#xa;Worker 1&#xa;172.20.102.9&#xa;16 vCPU / 16GB RAM / 256GB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#388e3c;fontSize=12;fontStyle=1;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="350" y="180" width="160" height="80" as="geometry" />
         </mxCell>
-        
-        <mxCell id="wk2-node" value="talos-kafka-wk-110&#xa;Worker 2&#xa;172.20.102.10&#xa;16 vCPU / 16GB RAM / 256GB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#388e3c;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="wk2-node" value="talos-kafka-wk-110&#xa;Worker 2&#xa;172.20.102.10&#xa;16 vCPU / 16GB RAM / 256GB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#388e3c;fontSize=12;fontStyle=1;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="550" y="180" width="160" height="80" as="geometry" />
         </mxCell>
-        
-        <mxCell id="wk3-node" value="talos-kafka-wk-111&#xa;Worker 3&#xa;172.20.102.11&#xa;16 vCPU / 16GB RAM / 256GB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#388e3c;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="wk3-node" value="talos-kafka-wk-111&#xa;Worker 3&#xa;172.20.102.11&#xa;16 vCPU / 16GB RAM / 256GB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#388e3c;fontSize=12;fontStyle=1;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="750" y="180" width="160" height="80" as="geometry" />
         </mxCell>
-        
-        <!-- Network Info -->
-        <mxCell id="network-info" value="Network Configuration&#xa;Subnet: 172.20.102.0/25&#xa;Gateway: 172.20.102.126&#xa;DNS: 96.45.45.45, 96.45.46.46&#xa;Interface: ens18 (static)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57c00;fontSize=10;" vertex="1" parent="1">
+        <mxCell id="network-info" value="Network Configuration&#xa;Subnet: 172.20.102.0/25&#xa;Gateway: 172.20.102.126&#xa;DNS: 96.45.45.45, 96.45.46.46&#xa;Interface: ens18 (static)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57c00;fontSize=10;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="950" y="180" width="180" height="80" as="geometry" />
         </mxCell>
-        
-        <!-- Istio Service Mesh -->
-        <mxCell id="istio-layer" value="Istio Service Mesh v1.27.1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+        <mxCell id="istio-layer" value="Istio Service Mesh v1.27.1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;fontColor=#000000;arcSize=3;" parent="1" vertex="1">
           <mxGeometry x="150" y="300" width="1350" height="700" as="geometry" />
         </mxCell>
-        
-        <!-- Istio Gateway -->
-        <mxCell id="istio-gateway" value="Ingress Gateway&#xa;172.20.102.50&#xa;(LoadBalancer)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0277bd;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="istio-gateway" value="Ingress Gateway&#xa;172.20.102.50&#xa;(LoadBalancer)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0277bd;fontSize=11;fontStyle=1;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="200" y="350" width="120" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- Apache Kafka Cluster -->
-        <mxCell id="kafka-cluster" value="Apache Kafka Cluster (KRaft Mode)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff59d;strokeColor=#f9a825;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
-          <mxGeometry x="200" y="450" width="480" height="300" as="geometry" />
+        <mxCell id="kafka-cluster" value="Apache Kafka Cluster (KRaft Mode)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff59d;strokeColor=#f9a825;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=10;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="200" y="450" width="510" height="300" as="geometry" />
         </mxCell>
-        
-        <!-- Kafka Brokers -->
-        <mxCell id="kafka-broker-0" value="kafka-cluster-dual-role-0&#xa;Broker + Controller&#xa;128Gi Storage&#xa;External: 172.20.102.55:9094" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcc02;strokeColor=#f9a825;fontSize=10;" vertex="1" parent="1">
+        <mxCell id="kafka-broker-0" value="kafka-cluster-dual-role-0&#xa;Broker + Controller&#xa;128Gi Storage&#xa;External: 172.20.102.55:9094" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcc02;strokeColor=#f9a825;fontSize=10;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="220" y="490" width="140" height="70" as="geometry" />
         </mxCell>
-        
-        <mxCell id="kafka-broker-1" value="kafka-cluster-dual-role-1&#xa;Broker + Controller&#xa;128Gi Storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcc02;strokeColor=#f9a825;fontSize=10;" vertex="1" parent="1">
+        <mxCell id="kafka-broker-1" value="kafka-cluster-dual-role-1&#xa;Broker + Controller&#xa;128Gi Storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcc02;strokeColor=#f9a825;fontSize=10;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="380" y="490" width="140" height="70" as="geometry" />
         </mxCell>
-        
-        <mxCell id="kafka-broker-2" value="kafka-cluster-dual-role-2&#xa;Broker + Controller&#xa;128Gi Storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcc02;strokeColor=#f9a825;fontSize=10;" vertex="1" parent="1">
+        <mxCell id="kafka-broker-2" value="kafka-cluster-dual-role-2&#xa;Broker + Controller&#xa;128Gi Storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcc02;strokeColor=#f9a825;fontSize=10;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="540" y="490" width="140" height="70" as="geometry" />
         </mxCell>
-        
-        <!-- Strimzi Operator -->
-        <mxCell id="strimzi-operator" value="Strimzi Operator&#xa;v0.47.0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcc02;strokeColor=#f9a825;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="strimzi-operator" value="Strimzi Operator&#xa;v0.47.0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcc02;strokeColor=#f9a825;fontSize=11;fontStyle=1;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="220" y="580" width="100" height="50" as="geometry" />
         </mxCell>
-        
-        <!-- Entity Operator -->
-        <mxCell id="entity-operator" value="Entity Operator&#xa;Topic + User Mgmt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcc02;strokeColor=#f9a825;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="entity-operator" value="Entity Operator&#xa;Topic + User Mgmt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcc02;strokeColor=#f9a825;fontSize=11;fontStyle=1;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="340" y="580" width="100" height="50" as="geometry" />
         </mxCell>
-        
-        <!-- JVM Configuration -->
-        <mxCell id="jvm-config" value="JVM Configuration&#xa;G1GC with 20ms target&#xa;Heap: 2GB-4GB&#xa;Readiness: 60s&#xa;Liveness: 90s" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57c00;fontSize=10;" vertex="1" parent="1">
+        <mxCell id="jvm-config" value="JVM Configuration&#xa;G1GC with 20ms target&#xa;Heap: 2GB-4GB&#xa;Readiness: 60s&#xa;Liveness: 90s" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57c00;fontSize=10;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="460" y="580" width="140" height="80" as="geometry" />
         </mxCell>
-        
-        <!-- Observability Stack -->
-        <mxCell id="observability-stack" value="Observability Stack (3 Pillars)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#388e3c;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
-          <mxGeometry x="750" y="350" width="700" height="400" as="geometry" />
+        <mxCell id="observability-stack" value="Observability Stack (3 Pillars)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#388e3c;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=10;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="750" y="450" width="700" height="300" as="geometry" />
         </mxCell>
-        
-        <!-- Prometheus -->
-        <mxCell id="prometheus" value="Prometheus&#xa;172.20.102.51:9090&#xa;Metrics Collection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57c00;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="780" y="390" width="120" height="60" as="geometry" />
+        <mxCell id="prometheus" value="Prometheus&#xa;172.20.102.51:9090&#xa;Metrics Collection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57c00;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="780" y="550" width="120" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- Grafana -->
-        <mxCell id="grafana" value="Grafana&#xa;/grafana&#xa;Dashboards + Logs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#388e3c;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="920" y="390" width="120" height="60" as="geometry" />
+        <mxCell id="grafana" value="Grafana&#xa;/grafana&#xa;Dashboards + Logs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#388e3c;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="910" y="550" width="120" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- Loki -->
-        <mxCell id="loki" value="Loki&#xa;Log Aggregation&#xa;Integrated with Grafana" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c2185b;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1060" y="390" width="120" height="60" as="geometry" />
+        <mxCell id="loki" value="Loki&#xa;Log Aggregation&#xa;Integrated with Grafana" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c2185b;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="1040" y="550" width="120" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- Promtail -->
-        <mxCell id="promtail" value="Promtail DaemonSet&#xa;Log Collection&#xa;(4 nodes)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f8e9;strokeColor=#689f38;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1200" y="390" width="120" height="60" as="geometry" />
+        <mxCell id="promtail" value="Promtail DaemonSet&#xa;Log Collection&#xa;(4 nodes)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f8e9;strokeColor=#689f38;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="1170" y="550" width="120" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- Kiali -->
-        <mxCell id="kiali" value="Kiali&#xa;/kiali&#xa;Service Mesh UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="780" y="470" width="120" height="60" as="geometry" />
+        <mxCell id="kiali" value="Kiali&#xa;/kiali&#xa;Service Mesh UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="780" y="650" width="120" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- Jaeger -->
-        <mxCell id="jaeger" value="Jaeger&#xa;/jaeger&#xa;Distributed Tracing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#fbc02d;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="920" y="470" width="120" height="60" as="geometry" />
+        <mxCell id="jaeger" value="Jaeger&#xa;/jaeger&#xa;Distributed Tracing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#fbc02d;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="910" y="650" width="120" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- Infrastructure Components -->
-        <mxCell id="infra-layer" value="Infrastructure Components" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#616161;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
-          <mxGeometry x="200" y="800" width="1250" height="200" as="geometry" />
+        <mxCell id="infra-layer" value="Infrastructure Components" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#616161;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=10;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="200" y="800" width="1250" height="150" as="geometry" />
         </mxCell>
-        
-        <!-- MetalLB -->
-        <mxCell id="metallb" value="MetalLB L2&#xa;Load Balancer&#xa;172.20.102.50-59" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#1976d2;fontSize=11;" vertex="1" parent="1">
+        <mxCell id="metallb" value="MetalLB L2&#xa;Load Balancer&#xa;172.20.102.50-59" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#1976d2;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="230" y="840" width="120" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- Local Path Provisioner -->
-        <mxCell id="local-path" value="Local Path Provisioner&#xa;/opt/kafka-data&#xa;384Gi Total Storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#388e3c;fontSize=11;" vertex="1" parent="1">
+        <mxCell id="local-path" value="Local Path Provisioner&#xa;/opt/kafka-data&#xa;384Gi Total Storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#388e3c;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="380" y="840" width="140" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- Cilium CNI -->
-        <mxCell id="cilium" value="Cilium CNI&#xa;Container Networking&#xa;(Native Talos)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;fontSize=11;" vertex="1" parent="1">
+        <mxCell id="cilium" value="Cilium CNI&#xa;Container Networking&#xa;(Native Talos)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="550" y="840" width="120" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- containerd -->
-        <mxCell id="containerd" value="containerd v2.0.5&#xa;Container Runtime" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57c00;fontSize=11;" vertex="1" parent="1">
+        <mxCell id="containerd" value="containerd v2.0.5&#xa;Container Runtime" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57c00;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="700" y="840" width="120" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- QEMU Guest Agent -->
-        <mxCell id="qemu-agent" value="QEMU Guest Agent&#xa;Enabled on all VMs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c2185b;fontSize=11;" vertex="1" parent="1">
+        <mxCell id="qemu-agent" value="QEMU Guest Agent&#xa;Enabled on all VMs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c2185b;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="850" y="840" width="120" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- Storage Class -->
-        <mxCell id="storage-class" value="StorageClass&#xa;local-path&#xa;Dynamic Provisioning" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#388e3c;fontSize=11;" vertex="1" parent="1">
+        <mxCell id="storage-class" value="StorageClass&#xa;local-path&#xa;Dynamic Provisioning" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#388e3c;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="1000" y="840" width="120" height="60" as="geometry" />
         </mxCell>
-        
-        <!-- Access Points -->
-        <mxCell id="access-info" value="External Access Points" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffebee;strokeColor=#d32f2f;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
-          <mxGeometry x="1200" y="180" width="300" height="200" as="geometry" />
+        <mxCell id="access-info" value="External Access Points" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffebee;strokeColor=#d32f2f;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=10;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="180" width="270" height="200" as="geometry" />
         </mxCell>
-        
-        <mxCell id="kafka-external" value="☕ Kafka External:&#xa;172.20.102.55:9094" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#d32f2f;" vertex="1" parent="1">
+        <mxCell id="kafka-external" value="☕ Kafka External:&#xa;172.20.102.55:9094" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="1220" y="220" width="260" height="25" as="geometry" />
         </mxCell>
-        
-        <mxCell id="kiali-access" value="🔍 Kiali: http://172.20.102.50/kiali" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#7b1fa2;" vertex="1" parent="1">
+        <mxCell id="kiali-access" value="🔍 Kiali: http://172.20.102.50/kiali" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="1220" y="245" width="260" height="25" as="geometry" />
         </mxCell>
-        
-        <mxCell id="grafana-access" value="📈 Grafana: http://172.20.102.50/grafana" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#388e3c;" vertex="1" parent="1">
+        <mxCell id="grafana-access" value="📈 Grafana: http://172.20.102.50/grafana" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="1220" y="270" width="260" height="25" as="geometry" />
         </mxCell>
-        
-        <mxCell id="jaeger-access" value="🕵️ Jaeger: http://172.20.102.50/jaeger" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#fbc02d;" vertex="1" parent="1">
+        <mxCell id="jaeger-access" value="🕵️ Jaeger: http://172.20.102.50/jaeger" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="1220" y="295" width="260" height="25" as="geometry" />
         </mxCell>
-        
-        <mxCell id="prometheus-access" value="📊 Prometheus: http://172.20.102.51:9090" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#f57c00;" vertex="1" parent="1">
+        <mxCell id="prometheus-access" value="📊 Prometheus: http://172.20.102.51:9090" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="1220" y="320" width="260" height="25" as="geometry" />
         </mxCell>
-        
-        <!-- Connections -->
-        
-        <!-- Kafka cluster internal connections -->
-        <mxCell id="kafka-conn-1" value="" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#f9a825;strokeWidth=2;" edge="1" parent="1" source="kafka-broker-0" target="kafka-broker-1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="400" y="600" as="sourcePoint" />
-            <mxPoint x="450" y="550" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        
-        <mxCell id="kafka-conn-2" value="" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#f9a825;strokeWidth=2;" edge="1" parent="1" source="kafka-broker-1" target="kafka-broker-2">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="400" y="600" as="sourcePoint" />
-            <mxPoint x="450" y="550" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        
-        <mxCell id="kafka-conn-3" value="" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#f9a825;strokeWidth=2;" edge="1" parent="1" source="kafka-broker-2" target="kafka-broker-0">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="400" y="600" as="sourcePoint" />
-            <mxPoint x="450" y="550" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- Strimzi to Kafka connections -->
-        <mxCell id="strimzi-kafka-conn" value="" style="endArrow=classic;html=1;strokeColor=#ffcc02;strokeWidth=2;" edge="1" parent="1" source="strimzi-operator" target="kafka-broker-0">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="400" y="600" as="sourcePoint" />
-            <mxPoint x="450" y="550" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- Gateway to observability -->
-        <mxCell id="gateway-kiali" value="" style="endArrow=classic;html=1;strokeColor=#7b1fa2;strokeWidth=2;" edge="1" parent="1" source="istio-gateway" target="kiali">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="400" y="600" as="sourcePoint" />
-            <mxPoint x="450" y="550" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        
-        <mxCell id="gateway-grafana" value="" style="endArrow=classic;html=1;strokeColor=#388e3c;strokeWidth=2;" edge="1" parent="1" source="istio-gateway" target="grafana">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="400" y="600" as="sourcePoint" />
-            <mxPoint x="450" y="550" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- Storage to Kafka -->
-        <mxCell id="storage-kafka" value="" style="endArrow=classic;html=1;strokeColor=#388e3c;strokeWidth=2;" edge="1" parent="1" source="local-path" target="kafka-cluster">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="400" y="750" as="sourcePoint" />
-            <mxPoint x="450" y="700" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- MetalLB connections -->
-        <mxCell id="metallb-gateway" value="" style="endArrow=classic;html=1;strokeColor=#1976d2;strokeWidth=2;" edge="1" parent="1" source="metallb" target="istio-gateway">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="400" y="750" as="sourcePoint" />
-            <mxPoint x="450" y="700" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- Prometheus to Grafana -->
-        <mxCell id="prom-grafana" value="" style="endArrow=classic;html=1;strokeColor=#f57c00;strokeWidth=2;" edge="1" parent="1" source="prometheus" target="grafana">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="850" y="450" as="sourcePoint" />
-            <mxPoint x="900" y="400" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- Promtail to Loki -->
-        <mxCell id="promtail-loki" value="" style="endArrow=classic;html=1;strokeColor=#c2185b;strokeWidth=2;" edge="1" parent="1" source="promtail" target="loki">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1150" y="450" as="sourcePoint" />
-            <mxPoint x="1200" y="400" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- Loki to Grafana -->
-        <mxCell id="loki-grafana" value="" style="endArrow=classic;html=1;strokeColor=#c2185b;strokeWidth=2;strokeDashArray=5 5;" edge="1" parent="1" source="loki" target="grafana">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1050" y="450" as="sourcePoint" />
-            <mxPoint x="1000" y="400" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        
       </root>
     </mxGraphModel>
   </diagram>
