@@ -37,3 +37,10 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.
 - docs: simplificación significativa del README.md eliminando información redundante y repetitiva
 - docs: aplicación de reglas lingüísticas ~/cot/linguistics.md a README.md, CHANGELOG.md y *scripts*/generate.sh
 - docs: corrección de capitalización de títulos a estilo oración, aplicación de cursivas en préstamos técnicos y mejoras de redacción en español mexicano
+
+### Nuevos diagramas y funcionalidades
+- feat: agregado diagrama detallado de arquitectura Kafka + Talos Linux basado en proyecto GitLab
+- feat: diagrama completo que incluye Proxmox VE, Kubernetes, Istio, Apache Kafka KRaft y *stack* de observabilidad
+- docs: referencia agregada a tarea Jira AVAMVP-1860 para trazabilidad del proyecto
+- docs: clarificación de requisitos obligatorios vs opcionales (draw.io desktop requerido, edición manual opcional)
+- docs: documentación de ventaja de edición dual (visual + XML manual) en el *workflow*
