@@ -142,6 +142,8 @@ drawio --version
 
 **Contribuciones**: *Fork* → *Branch* → Documentar cambios → *Pull Request*
 
+**Tarea Jira**: [AVAMVP-1860](https://avite.atlassian.net/browse/AVAMVP-1860)
+
 ---
 
 **Versión**: 1.0.0 | **Estado**: ✅ Funcional | **Última actualización**: 26 de septiembre de 2025, 11:49 (CST)
