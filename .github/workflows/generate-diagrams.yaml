@@ -3,6 +3,9 @@ name: Generate and Deploy Diagrams
 on:
   push:
     branches: [main]
+    paths: 
+      - 'src/**/*.drawio'
+      - '.github/workflows/generate-diagrams.yaml'
   workflow_dispatch:
   
 permissions:
@@ -25,6 +28,13 @@ jobs:
         with:
           fetch-depth: 0
         
+      - name: Convert drawio files to PNG
+        uses: rlespinasse/drawio-export-action@v2
+        with:
+          path: src
+          format: png
+          output: public
+          
       - name: Create basic static page
         run: |
           mkdir -p public
@@ -83,7 +93,29 @@ jobs:
                   <div class="file-list">
           EOF
           
-          # List all .drawio files
+          # List generated PNG files and .drawio source files
+          echo "<h4>Diagrams generados (PNG):</h4>" >> public/index.html
+          find public -name "*.png" 2>/dev/null | sort | while read img; do
+            if [ -f "$img" ]; then
+              rel_path=${img#public/}
+              name=$(basename "$img" .png)
+              dir_name=$(dirname "$rel_path")
+              if [ "$dir_name" != "." ]; then
+                display_name="$dir_name/$name"
+              else
+                display_name="$name"
+              fi
+              
+              echo "<div style='margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 4px;'>" >> public/index.html
+              echo "<h4>🇺 $display_name</h4>" >> public/index.html
+              echo "<img src='./$rel_path' alt='$name' style='max-width: 500px; height: auto; border: 1px solid #eee;'/>" >> public/index.html
+              echo "<p><strong>URL para Confluence:</strong></p>" >> public/index.html
+              echo "<code style='display: block; padding: 8px; background: #f0f0f0; border-radius: 3px; word-break: break-all;'>https://incogniadev.github.io/Diagrams/$rel_path</code>" >> public/index.html
+              echo "</div>" >> public/index.html
+            fi
+          done
+          
+          echo "<h4>Archivos fuente (.drawio):</h4>" >> public/index.html
           find src -name "*.drawio" | while read file; do
             echo "<p>📄 <code>$file</code></p>" >> public/index.html
           done
