@@ -1,8 +1,9 @@
-# Generated files
-public/
-*.png
-*.svg
-*.pdf
+# Generated PNG files (but keep index.html)
+public/*.png
+public/*.svg
+public/*.pdf
+
+# OS generated files (keep folder structure)
 
 # OS generated files
 .DS_Store
