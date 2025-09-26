@@ -3,7 +3,6 @@ name: Generate and Deploy Diagrams
 on:
   push:
     branches: [main]
-    paths: ['src/**/*.drawio']
   workflow_dispatch:
   
 permissions:
@@ -26,71 +25,89 @@ jobs:
         with:
           fetch-depth: 0
         
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      
-      - name: Install draw.io CLI
-        run: |
-          npm install -g @mermaid-js/mermaid-cli
-          npm install -g drawio-batch
-      
-      - name: Export drawio files to PNG
+      - name: Create basic static page
         run: |
           mkdir -p public
-          find src -name "*.drawio" | while read file; do
-            # Get relative path and create output directory structure
-            rel_path=${file#src/}
-            output_dir="public/$(dirname "$rel_path")"
-            mkdir -p "$output_dir"
-            
-            # Convert to PNG
-            filename=$(basename "$file" .drawio)
-            output_file="$output_dir/$filename.png"
-            
-            # Use drawio desktop in headless mode
-            docker run --rm -v "$PWD:/workspace" \
-              ghcr.io/jgraph/drawio-desktop:latest \
-              --crop --export --format png \
-              --output "/workspace/$output_file" \
-              "/workspace/$file" || echo "Failed to convert $file, skipping..."
-          done
           
-      - name: Generate simple index page
-        run: |
-          mkdir -p public
           cat > public/index.html << 'EOF'
           <!DOCTYPE html>
           <html>
           <head>
-              <title>Incognia Diagrams</title>
+              <title>incognia Diagrams Repository</title>
               <style>
-                  body { font-family: Arial, sans-serif; margin: 40px; }
-                  .diagram { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
-                  img { max-width: 500px; height: auto; }
-                  .url { background: #f0f0f0; padding: 5px; font-family: monospace; }
+                  body { 
+                      font-family: Arial, sans-serif; 
+                      margin: 40px;
+                      background: #f5f5f5;
+                  }
+                  .container {
+                      max-width: 800px;
+                      margin: 0 auto;
+                      background: white;
+                      padding: 30px;
+                      border-radius: 8px;
+                      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                  }
+                  h1 { color: #333; }
+                  .status { 
+                      background: #e3f2fd; 
+                      padding: 15px; 
+                      border-radius: 4px;
+                      margin: 20px 0;
+                  }
+                  .file-list {
+                      background: #f8f9fa;
+                      padding: 15px;
+                      border-radius: 4px;
+                      margin: 20px 0;
+                  }
+                  code {
+                      background: #f1f1f1;
+                      padding: 2px 6px;
+                      border-radius: 3px;
+                      font-family: 'Courier New', monospace;
+                  }
               </style>
           </head>
           <body>
-              <h1>📊 Incognia Diagrams</h1>
-              <p>URL base: <code>https://incogniadev.github.io/Diagrams/</code></p>
+              <div class="container">
+                  <h1>📊 Incognia Diagrams Repository</h1>
+                  
+                  <div class="status">
+                      <h3>✅ GitHub Pages está funcionando!</h3>
+                      <p>Esta página se genera automáticamente desde el repositorio.</p>
+                      <p><strong>URL base:</strong> <code>https://incogniadev.github.io/Diagrams/</code></p>
+                  </div>
+                  
+                  <h3>📁 Archivos .drawio encontrados:</h3>
+                  <div class="file-list">
           EOF
           
-          # Add diagrams to index
-          find public -name "*.png" 2>/dev/null | while read img; do
-            if [ -f "$img" ]; then
-              rel_path=${img#public/}
-              name=$(basename "$img" .png)
-              echo "<div class='diagram'>" >> public/index.html
-              echo "<h3>$name</h3>" >> public/index.html
-              echo "<img src='./$rel_path' alt='$name'/>" >> public/index.html
-              echo "<div class='url'>https://incogniadev.github.io/Diagrams/$rel_path</div>" >> public/index.html
-              echo "</div>" >> public/index.html
-            fi
+          # List all .drawio files
+          find src -name "*.drawio" | while read file; do
+            echo "<p>📄 <code>$file</code></p>" >> public/index.html
           done
           
-          echo "</body></html>" >> public/index.html
+          cat >> public/index.html << 'EOF'
+                  </div>
+                  
+                  <h3>🚧 Estado actual:</h3>
+                  <p>GitHub Pages está configurado y funcionando. La conversión automática de diagramas está en desarrollo.</p>
+                  
+                  <h3>📖 Cómo usar:</h3>
+                  <ol>
+                      <li>Los archivos .drawio se encuentran en el repositorio privado</li>
+                      <li>Una vez configurada la conversión, las imágenes PNG estarán disponibles aquí</li>
+                      <li>Las URLs para Confluence seguirán el formato: <code>https://incogniadev.github.io/Diagrams/ruta/archivo.png</code></li>
+                  </ol>
+                  
+                  <p><small>Última actualización: $(date)</small></p>
+                  <p><small>Repositorio: <a href="https://github.com/incogniadev/Diagrams">incogniadev/Diagrams</a></small></p>
+              </div>
+          </body>
+          </html>
+          EOF
+          
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
