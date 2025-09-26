@@ -1,0 +1,35 @@
+# Generated files
+public/
+*.png
+*.svg
+*.pdf
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*~
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (if using any JS tools)
+node_modules/
+npm-debug.log
+
+# Draw.io backup files
+*.bkp
+*.dtmp
+
+# Log files
+*.log

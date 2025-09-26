@@ -1,0 +1,185 @@
+name: Generate and Deploy Diagrams
+
+on:
+  push:
+    branches: [main]
+    paths: ['src/**/*.drawio']
+  workflow_dispatch:
+  
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the already running and latest queued.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  generate-diagrams:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Export drawio files to PNG and SVG
+        uses: rlespinasse/drawio-export-action@v2
+        with:
+          path: src/
+          remove-page-suffix: true
+          output: public/
+          format: png
+          
+      - name: Export drawio files to SVG (additional format)
+        uses: rlespinasse/drawio-export-action@v2
+        with:
+          path: src/
+          remove-page-suffix: true
+          output: public/svg/
+          format: svg
+          
+      - name: Generate index page
+        run: |
+          cat > public/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="es">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Incognia Diagrams</title>
+              <style>
+                  body { 
+                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                      margin: 0;
+                      padding: 20px;
+                      background: #f8f9fa;
+                  }
+                  .container { max-width: 1200px; margin: 0 auto; }
+                  .header {
+                      background: white;
+                      padding: 20px;
+                      border-radius: 8px;
+                      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                      margin-bottom: 20px;
+                  }
+                  .diagram-grid {
+                      display: grid;
+                      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                      gap: 20px;
+                  }
+                  .diagram-card {
+                      background: white;
+                      border-radius: 8px;
+                      padding: 20px;
+                      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                  }
+                  .diagram-card img {
+                      max-width: 100%;
+                      height: auto;
+                      border-radius: 4px;
+                      cursor: pointer;
+                  }
+                  .diagram-title {
+                      font-size: 18px;
+                      font-weight: 600;
+                      margin-bottom: 10px;
+                      color: #333;
+                  }
+                  .diagram-url {
+                      background: #f1f3f5;
+                      padding: 8px 12px;
+                      border-radius: 4px;
+                      font-family: 'Monaco', 'Consolas', monospace;
+                      font-size: 12px;
+                      word-break: break-all;
+                      margin-top: 10px;
+                  }
+                  .formats {
+                      margin-top: 10px;
+                  }
+                  .format-link {
+                      display: inline-block;
+                      margin-right: 10px;
+                      padding: 4px 8px;
+                      background: #007bff;
+                      color: white;
+                      text-decoration: none;
+                      border-radius: 3px;
+                      font-size: 12px;
+                  }
+                  .format-link:hover {
+                      background: #0056b3;
+                  }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <div class="header">
+                      <h1>📊 Incognia Diagrams Repository</h1>
+                      <p>Diagramas generados automáticamente desde archivos draw.io</p>
+                      <p><strong>URL base:</strong> <code>https://incogniadev.github.io/Diagrams/</code></p>
+                  </div>
+                  
+                  <div class="diagram-grid">
+          EOF
+          
+          # Generate diagram cards
+          find public -name "*.png" -not -path "*/svg/*" | sort | while read img; do
+            if [ -f "$img" ]; then
+              # Extract relative path and name
+              rel_path=${img#public/}
+              name=$(basename "$img" .png)
+              dir_name=$(dirname "$rel_path")
+              
+              # Clean up directory name for display
+              if [ "$dir_name" != "." ]; then
+                category=$(echo $dir_name | tr '/' ' > ')
+                display_name="$category > $name"
+              else
+                display_name="$name"
+              fi
+              
+              echo "<div class='diagram-card'>" >> public/index.html
+              echo "<div class='diagram-title'>$display_name</div>" >> public/index.html
+              echo "<img src='./$rel_path' alt='$name' onclick='window.open(this.src)'/>" >> public/index.html
+              echo "<div class='formats'>" >> public/index.html
+              echo "<a href='./$rel_path' class='format-link' target='_blank'>PNG</a>" >> public/index.html
+              
+              # Check if SVG version exists
+              svg_path="svg/$rel_path"
+              svg_path="${svg_path%.png}.svg"
+              if [ -f "public/$svg_path" ]; then
+                echo "<a href='./$svg_path' class='format-link' target='_blank'>SVG</a>" >> public/index.html
+              fi
+              
+              echo "</div>" >> public/index.html
+              echo "<div class='diagram-url'>https://incogniadev.github.io/Diagrams/$rel_path</div>" >> public/index.html
+              echo "</div>" >> public/index.html
+            fi
+          done
+          
+          cat >> public/index.html << 'EOF'
+                  </div>
+                  
+                  <div style="margin-top: 40px; text-align: center; color: #666; font-size: 14px;">
+                      <p>Última actualización: $(date)</p>
+                      <p>Repositorio: <a href="https://github.com/incogniadev/Diagrams">incogniadev/Diagrams</a></p>
+                  </div>
+              </div>
+          </body>
+          </html>
+          EOF
+          
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public/
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
