@@ -28,12 +28,46 @@ jobs:
         with:
           fetch-depth: 0
         
+      - name: Install draw.io desktop
+        run: |
+          # Install dependencies
+          sudo apt-get update
+          sudo apt-get install -y wget xvfb
+          
+          # Download draw.io desktop AppImage
+          wget -O drawio.AppImage "https://github.com/jgraph/drawio-desktop/releases/download/v21.6.5/draw.io-x86_64-21.6.5.AppImage"
+          chmod +x drawio.AppImage
+          
       - name: Convert drawio files to PNG
-        uses: rlespinasse/drawio-export-action@v2
-        with:
-          path: src
-          format: png
-          output: public
+        run: |
+          mkdir -p public/architecture public/workflows public/infrastructure public/business
+          
+          # Convert each .drawio file to PNG
+          find src -name "*.drawio" | while read file; do
+            echo "Processing $file"
+            
+            # Get relative path and create output path
+            rel_path=${file#src/}
+            output_dir="public/$(dirname "$rel_path")"
+            mkdir -p "$output_dir"
+            
+            # Output filename
+            filename=$(basename "$file" .drawio)
+            output_file="$output_dir/$filename.png"
+            
+            # Convert using drawio desktop in headless mode
+            xvfb-run -a ./drawio.AppImage --export --crop --width 1200 --format png --output "$output_file" "$file"
+            
+            if [ -f "$output_file" ]; then
+              echo "Successfully created: $output_file"
+            else
+              echo "Failed to create: $output_file"
+            fi
+          done
+          
+          # List generated files
+          echo "Generated PNG files:"
+          find public -name "*.png" -type f
           
       - name: Create basic static page
         run: |

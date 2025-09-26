@@ -13,3 +13,4 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.
 - fix: creación de página estática básica para establecer GitHub Pages funcionando antes de implementar conversión
 - feat: implementación de conversión automática de archivos .drawio a PNG con visualización en página web y URLs para Confluence
 - fix: corrección del formato XML del archivo .drawio para compatibilidad completa con herramientas de conversión
+- fix: cambio a instalación directa de draw.io desktop para conversión confiable usando AppImage y xvfb
