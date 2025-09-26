@@ -57,8 +57,9 @@ Diagrams/
 ## 🚀 Uso
 
 ### 1. Prerrequisitos
-- Instalar [draw.io desktop](https://github.com/jgraph/drawio-desktop/releases)
-- Asegúrate de que `drawio` esté disponible en PATH
+- **Obligatorio**: Instalar [draw.io desktop](https://github.com/jgraph/drawio-desktop/releases) para conversión PNG
+- **Obligatorio**: Asegúrate de que `drawio` esté disponible en PATH
+- **Opcional**: Editor de texto para edición manual (archivos `.drawio` son XML válido)
 
 ### 2. Agregar Diagramas
 - Coloca los archivos `.drawio` en la carpeta `drawio/`
@@ -98,9 +99,13 @@ https://incogniadev.github.io/Diagrams/nombre-diagrama.png
 
 ## ⚙️ Características
 
-**Ventajas**: Confiable, simple (un comando), control total, rápido, debugging inmediato.
+**Ventajas**: 
+- Confiable, simple (un comando), control total, rápido
+- Debugging inmediato con errores visibles
+- **Edición dual**: Visual (draw.io desktop) + Manual (XML directo)
+- **Flexibilidad total**: Cualquier archivo `.drawio` válido se procesa automáticamente
 
-**Limitaciones**: Requiere ejecución manual local y draw.io desktop instalado.
+**Limitaciones**: Requiere ejecución manual local y draw.io desktop instalado (obligatorio para conversión PNG).
 
 ## 🔧 Solución de problemas
 
@@ -124,13 +129,32 @@ drawio --version
 - Verificar que `public/` contiene `index.html` y los archivos PNG
 - Revisar la pestaña Actions para errores de despliegue
 
+### Edición manual de diagramas
+```bash
+# Los archivos .drawio son XML válido - puedes editarlos directamente
+vim drawio/mi-diagrama.drawio
+
+# Después generar normalmente
+./scripts/generate.sh
+```
+**Ventaja**: Útil para cambios rápidos de texto, colores, o posiciones sin abrir draw.io desktop.
+
 ## 🚀 Workflow
 
+### Flujo completo
 1. **Editar**: Crear/editar diagramas con draw.io desktop
 2. **Generar**: `./scripts/generate.sh`
 3. **Verificar**: Abrir `public/index.html` localmente
 4. **Desplegar**: `git add . && git *commit* && git push`
 5. **Usar**: URLs disponibles en Confluence
+
+### ⭐ Ventaja: Edición manual directa
+Una gran ventaja del sistema es que puedes **editar manualmente** los archivos `.drawio` como XML y el *script* generará los PNG sin problemas:
+
+- **Edición por código**: Modificar directamente el XML del `.drawio` para ajustes precisos
+- **Automatización**: El *script* procesa cualquier archivo `.drawio` válido (draw.io desktop sigue siendo necesario para la conversión)
+- **Flexibilidad**: Combinar edición visual (draw.io desktop) con edición manual según necesidades
+- **Eficiencia**: Cambios rápidos de texto/colores sin abrir la aplicación gráfica
 
 ## 📞 Soporte y contacto
 
