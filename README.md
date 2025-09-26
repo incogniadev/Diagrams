@@ -16,55 +16,35 @@ tags: diagrams, drawio, confluence, github-pages, automation, png, devops, docum
 
 *Última modificación: 26 de septiembre de 2025, 11:49 (CST)*
 
-Repositorio para generar y servir diagramas PNG desde archivos draw.io para uso en Confluence con sistema de generación automática local y despliegue vía GitHub Pages.
+Sistema de generación local y despliegue automático de diagramas PNG desde archivos draw.io para integración con Confluence. Utiliza draw.io desktop local para conversión confiable y GitHub Pages para servir las imágenes.
 
-## ⚠️ Justificación Técnica y Limitaciones
+## ⚠️ Consideraciones técnicas
 
-### Problemática de Confluence
-Confluence presenta **soporte muy limitado** para diagramas profesionales:
-- ❌ **Sin soporte nativo** para Mermaid o diagramas como código
-- ❌ **Renderizado inadecuado** de diagramas ASCII/texto
-- ❌ **Funcionalidad limitada** en plugins de diagramas
+### Justificación de la solución
+**Problemática**: Confluence presenta soporte limitado para diagramas profesionales (sin Mermaid nativo, renderizado inadecuado de ASCII, plugins limitados).
 
-### Solución Implementada
-Debido a estas limitaciones técnicas, me vi **orillado a implementar** una solución basada en imágenes PNG:
-- ✅ **Compatibilidad universal** con Confluence
-- ✅ **Renderizado consistente** en todas las plataformas
-- ✅ **Calidad profesional** mediante draw.io
+**Solución**: Sistema PNG con draw.io desktop que garantiza compatibilidad universal, renderizado consistente y calidad profesional.
 
-### Limitaciones de Seguridad
-**IMPORTANTE**: Para utilizar GitHub Pages, el repositorio debe ser **público**, lo que implica:
-- ⚠️ **Solo diagramas conceptuales sencillos** sin información sensible
-- ⚠️ **Referencias y mapas conceptuales** para Confluence
-- ⚠️ **No incluir datos confidenciales** de la empresa
+### Limitaciones de seguridad
+**IMPORTANTE**: Repositorio público para GitHub Pages. Solo usar para:
+- ⚠️ Diagramas conceptuales sin información sensible
+- ⚠️ Referencias y mapas conceptuales generales
+- ⚠️ **Nunca incluir datos confidenciales empresariales**
 
-### Arquitectura de Documentación
-- **Confluence**: Diagramas de **referencia y mapas conceptuales** (repositorio público)
-- **GitLab Corporativo**: Documentación técnica detallada con **credenciales corporativas** (repositorio privado)
+### Arquitectura de documentación
+- **Este repositorio**: Diagramas de referencia conceptual (público)
+- **GitLab Corporativo**: Documentación técnica detallada (privado)
 
-### Recomendación Empresarial
-**Para Promad / Grupo Kabat**: Se recomienda considerar las siguientes mejoras:
+### Recomendación empresarial
+Para diagramas sensibles considerar: CDN privado, infraestructura propia, o mantener separación en GitLab corporativo.
 
-1. **CDN Externo**: Implementar CDN externo para servir diagramas desde infraestructura privada
-2. **Infraestructura Privada**: Facilitar implementación de solución privada para diagramas sensibles
-3. **Separación de Contenido**: Mantener diagramas técnicos detallados en GitLab con acceso corporativo
+## ℹ️ Decisión técnica
 
-Esta implementación mantiene la **separación adecuada** entre diagramas públicos conceptuales y documentación técnica privada.
+**Problema**: GitHub Actions para conversión draw.io resultó inestable (errores de repositorio, permisos, entornos headless).
 
-## ⚠️ Historial de Implementación
+**Solución**: Scripts locales con draw.io desktop + despliegue estático. Más simple, confiable y con control total.
 
-### Intento Fallido: GitHub Actions Automático
-Inicialmente intentamos implementar conversión automática con GitHub Actions usando:
-- `rlespinasse/drawio-export-action@v2` → Errores de repositorio shallow
-- Docker con draw.io desktop → Exit code 8, problemas de permisos
-- AppImage directo → Falló en entorno headless de GitHub Actions
-
-**Conclusión**: La conversión automática de .drawio en GitHub Actions es problemática y poco confiable.
-
-### Solución Final: Scripts Locales
-Sistema simple y confiable usando draw.io desktop local + despliegue estático.
-
-## 🏗️ Estructura Simplificada
+## 🏗️ Estructura simplificada
 
 ```
 Diagrams/
@@ -78,13 +58,13 @@ Diagrams/
 
 ### 1. Prerrequisitos
 - Instalar [draw.io desktop](https://github.com/jgraph/drawio-desktop/releases)
-- Asegurar que `drawio` esté disponible en PATH
+- Asegúrate de que `drawio` esté disponible en PATH
 
 ### 2. Agregar Diagramas
-- Coloca archivos `.drawio` en la carpeta `drawio/`
+- Coloca los archivos `.drawio` en la carpeta `drawio/`
 - Usa nombres sin espacios: `system-architecture.drawio`
 
-### 3. Generar PNG y Página Web
+### 3. Generar PNG y página web
 ```bash
 ./scripts/generate.sh
 ```
@@ -98,11 +78,11 @@ Este script:
 ### 4. Desplegar
 ```bash
 git add .
-git commit -m "Update diagrams"
+git *commit* -m "Update diagrams"
 git push
 ```
 
-GitHub Pages despliega automáticamente desde la carpeta `public/`.
+GitHub Pages despliega el contenido automáticamente desde la carpeta `public/`.
 
 ## 🌐 URLs para Confluence
 
@@ -116,21 +96,13 @@ https://incogniadev.github.io/Diagrams/nombre-diagrama.png
 <img src="https://incogniadev.github.io/Diagrams/example-system.png" alt="System Architecture" />
 ```
 
-## 📋 Ventajas de Esta Solución
+## ⚙️ Características
 
-### ✅ Pros
-- **Confiable**: Usa draw.io desktop oficial local
-- **Simple**: Un script, un comando
-- **Control total**: No dependencias de terceros problemáticas
-- **Rápido**: Conversión local vs CI/CD lento
-- **Debugging**: Errores visibles inmediatamente
+**Ventajas**: Confiable, simple (un comando), control total, rápido, debugging inmediato.
 
-### ❌ Contras 
-- **Manual**: Requiere ejecutar script localmente
-- **Dependencia**: Necesita draw.io desktop instalado
-- **No automático**: No convierte al hacer push
+**Limitaciones**: Requiere ejecución manual local y draw.io desktop instalado.
 
-## 🔧 Solución de Problemas
+## 🔧 Solución de problemas
 
 ### "drawio command not found"
 ```bash
@@ -143,76 +115,39 @@ drawio --version
 ```
 
 ### Los PNG no se generan
-- Verificar formato de archivos `.drawio` (deben ser XML válido)
-- Probar abrir/guardar el archivo en draw.io desktop
-- Revisar permisos de escritura en carpeta `public/`
+- Verificar el formato de los archivos `.drawio` (deben ser XML válido)
+- Probar abrir y guardar el archivo en draw.io desktop
+- Revisar los permisos de escritura en la carpeta `public/`
 
 ### GitHub Pages no actualiza
-- Confirmar que el repo es público
-- Verificar que `public/` contiene `index.html` y archivos PNG
-- Revisar Actions tab para errores de despliegue
+- Confirmar que el repositorio es público
+- Verificar que `public/` contiene `index.html` y los archivos PNG
+- Revisar la pestaña Actions para errores de despliegue
 
-## 📚 Lecciones Aprendidas
+## 🚀 Workflow
 
-1. **GitHub Actions + draw.io = Problemático**: Múltiples intentos fallidos
-2. **Simplicidad > Automatización**: Herramientas locales son más confiables
-3. **Feedback inmediato**: Scripts locales permiten debugging fácil
-4. **Separación de responsabilidades**: Generación local + despliegue automático
-
-## 🚀 Workflow Recomendado
-
-1. **Editar**: Usar draw.io desktop para crear/editar diagramas
-2. **Generar**: `./scripts/generate.sh` después de cambios
+1. **Editar**: Crear/editar diagramas con draw.io desktop
+2. **Generar**: `./scripts/generate.sh`
 3. **Verificar**: Abrir `public/index.html` localmente
-4. **Desplegar**: `git add . && git commit && git push`
-5. **Usar**: URLs en Confluence inmediatamente disponibles
+4. **Desplegar**: `git add . && git *commit* && git push`
+5. **Usar**: URLs disponibles en Confluence
 
-## 📞 Soporte
+## 📞 Soporte y contacto
 
-Para problemas:
-1. Verificar que draw.io desktop funciona: `drawio --version`
-2. Revisar output detallado del script de generación
-3. Comprobar que archivos `.drawio` son válidos XML
+**Solución de problemas**: Verifica `drawio --version`, revisa la salida del script, valida el XML de los archivos .drawio.
 
----
+**Autor**: Rodrigo Ernesto Álvarez Aguilera - Ingeniero DevOps  
+**Correo**: [ralvarez@promad.com.mx](mailto:ralvarez@promad.com.mx)  
+**Teléfono**: +52 (55) 7980-9502
 
-## Contacto y soporte
-
-### **Autor principal**
-
-**Rodrigo Ernesto Álvarez Aguilera**  
-Ingeniero DevOps - Infraestructura y Documentación técnica  
-Correo: [ralvarez@promad.com.mx](mailto:ralvarez@promad.com.mx)  
-Oficina: Ejército Nacional 57, Miguel Hidalgo  
-Teléfono: +52 (55) 7980-9502
-
-### **Cómo contribuir**
-
-1. **Fork** del repositorio
-2. **Crear branch** para nueva funcionalidad
-3. **Seguir estructura** existente de configuraciones
-4. **Documentar** completamente los cambios
-5. **Pull Request** con descripción detallada
+**Contribuciones**: *Fork* → *Branch* → Documentar cambios → *Pull Request*
 
 ---
 
-**📅 Última actualización**: 26 de septiembre de 2025, 11:49 (CST)  
-**🏷️ Versión**: 1.0.0 - Sistema de diagramas completamente funcional  
-**📍 Infraestructura**: GitHub Pages + Scripts locales draw.io desktop  
-**🎯 Estado**: ✅ Sistema funcional con 3 diagramas de ejemplo desplegados
+**Versión**: 1.0.0 | **Estado**: ✅ Funcional | **Última actualización**: 26 de septiembre de 2025, 11:49 (CST)
 
 ## Licencia
 
-Esta documentación fue elaborada por el equipo de DevOps de Promad Business Solutions y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo [LICENSE](LICENSE).
-
----
-
-**Elaborado por**: Rodrigo Ernesto Álvarez Aguilera (@incogniadev)  
-**Fecha**: 26 de septiembre de 2025, 11:49 CST  
-**Proyecto**: Sistema de diagramas automatizado para Confluence  
-**Estado**: ✅ Sistema completo funcional con generación local y despliegue automático  
-**Versión**: 1.0.0
-
----
+MIT License - Promad Business Solutions, Equipo DevOps. Ver [LICENSE](LICENSE) para detalles.
 
 *Copyright © 2025, Promad Business Solutions - Equipo DevOps*

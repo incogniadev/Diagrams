@@ -1,7 +1,7 @@
 #!/bin/bash
-# Note: No 'set -e' porque drawio devuelve exit code 1 aunque funcione
+# Nota: No 'set -e' porque drawio devuelve código de salida 1 aunque funcione
 
-# Colores para output
+# Colores para salida
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -33,7 +33,7 @@ for file in drawio/*.drawio; do
         
         echo -e "${YELLOW}📄 Procesando: $file${NC}"
         
-        # Convertir usando draw.io desktop (ignorar exit code porque funciona pero devuelve 1)
+        # Convertir usando draw.io desktop (ignorar código de salida porque funciona pero devuelve 1)
         drawio --export --format png --width 1200 --output "$output" "$file" || true
         
         # Verificar si el archivo se creó exitosamente
@@ -142,4 +142,4 @@ EOF
 
 echo -e "${GREEN}✅ Página web generada en public/index.html${NC}"
 echo -e "${YELLOW}💡 Para ver localmente: open public/index.html${NC}"
-echo -e "${YELLOW}🚀 Para desplegar: git add . && git commit -m 'Update diagrams' && git push${NC}"
+echo -e "${YELLOW}🚀 Para desplegar: git add . && git *commit* -m 'Update diagrams' && git push${NC}"
