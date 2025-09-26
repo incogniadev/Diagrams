@@ -1,36 +1,15 @@
-# Generated PNG files (but keep index.html)
-public/*.png
-public/*.svg
-public/*.pdf
-
-# OS generated files (keep folder structure)
-
-# OS generated files
+# OS files
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
 
 # Temporary files
 *.tmp
 *~
 
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Node modules (if using any JS tools)
-node_modules/
-npm-debug.log
-
-# Draw.io backup files
-*.bkp
-*.dtmp
-
-# Log files
+# Logs
 *.log
