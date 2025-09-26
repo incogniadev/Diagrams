@@ -2,6 +2,39 @@
 
 Repositorio para generar y servir diagramas PNG desde archivos draw.io para uso en Confluence.
 
+## ⚠️ Justificación Técnica y Limitaciones
+
+### Problemática de Confluence
+Confluence presenta **soporte muy limitado** para diagramas profesionales:
+- ❌ **Sin soporte nativo** para Mermaid o diagramas como código
+- ❌ **Renderizado inadecuado** de diagramas ASCII/texto
+- ❌ **Funcionalidad limitada** en plugins de diagramas
+
+### Solución Implementada
+Debido a estas limitaciones técnicas, me vi **orillado a implementar** una solución basada en imágenes PNG:
+- ✅ **Compatibilidad universal** con Confluence
+- ✅ **Renderizado consistente** en todas las plataformas
+- ✅ **Calidad profesional** mediante draw.io
+
+### Limitaciones de Seguridad
+**IMPORTANTE**: Para utilizar GitHub Pages, el repositorio debe ser **público**, lo que implica:
+- ⚠️ **Solo diagramas conceptuales sencillos** sin información sensible
+- ⚠️ **Referencias y mapas conceptuales** para Confluence
+- ⚠️ **No incluir datos confidenciales** de la empresa
+
+### Arquitectura de Documentación
+- **Confluence**: Diagramas de **referencia y mapas conceptuales** (repositorio público)
+- **GitLab Corporativo**: Documentación técnica detallada con **credenciales corporativas** (repositorio privado)
+
+### Recomendación Empresarial
+**Para Promad / Grupo Kabat**: Se recomienda considerar las siguientes mejoras:
+
+1. **CDN Externo**: Implementar CDN externo para servir diagramas desde infraestructura privada
+2. **Infraestructura Privada**: Facilitar implementación de solución privada para diagramas sensibles
+3. **Separación de Contenido**: Mantener diagramas técnicos detallados en GitLab con acceso corporativo
+
+Esta implementación mantiene la **separación adecuada** entre diagramas públicos conceptuales y documentación técnica privada.
+
 ## ⚠️ Historial de Implementación
 
 ### Intento Fallido: GitHub Actions Automático

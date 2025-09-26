@@ -28,3 +28,5 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.
 - feat: instalación exitosa de draw.io desktop v28.1.2 desde RPM oficial
 - fix: corrección de manejo de códigos de salida en script generate.sh para evitar terminación prematura
 - feat: generación exitosa de PNG desde archivos .drawio con página web completa y URLs para Confluence
+- docs: justificación técnica empresarial por limitaciones de Confluence y recomendaciones para CDN externo
+- docs: documentación de arquitectura separada entre diagramas conceptuales públicos y documentación técnica privada en GitLab
