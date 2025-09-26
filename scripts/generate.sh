@@ -110,7 +110,7 @@ cat > public/index.html << EOF
 </head>
 <body>
     <div class="container">
-        <h1>📊 Incognia Diagrams Repository</h1>
+            <h1>📊 incognia Diagrams Repository</h1>
         <p><strong>URL base:</strong> <code>https://incogniadev.github.io/Diagrams/</code></p>
 EOF
 

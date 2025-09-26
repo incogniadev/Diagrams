@@ -1,4 +1,4 @@
-# 📊 Incognia Diagrams Repository
+# 📊 incognia Diagrams Repository
 
 Repositorio para generar y servir diagramas PNG desde archivos draw.io para uso en Confluence.
 
