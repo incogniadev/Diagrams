@@ -30,3 +30,5 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.
 - feat: generación exitosa de PNG desde archivos .drawio con página web completa y URLs para Confluence
 - docs: justificación técnica empresarial por limitaciones de Confluence y recomendaciones para CDN externo
 - docs: documentación de arquitectura separada entre diagramas conceptuales públicos y documentación técnica privada en GitLab
+- docs: formato profesional de documentación con encabezados YAML, badges de estado y footer corporativo
+- docs: licencia MIT agregada para cumplimiento legal empresarial

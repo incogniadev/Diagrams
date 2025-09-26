@@ -1,6 +1,22 @@
+---
+title: incognia Diagrams Repository - Sistema de generación automática
+date: 2025-09-26
+author: Rodrigo Ernesto Álvarez Aguilera
+tags: diagrams, drawio, confluence, github-pages, automation, png, devops, documentation
+---
+
+![PROMAD logo](https://hedgedoc.promad.com.mx:31418/uploads/eac9bca0-66f5-463e-9ccb-8813341a549c.png)
+
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Active-brightgreen?logo=github)](https://incogniadev.github.io/Diagrams/)
+[![Draw.io Desktop](https://img.shields.io/badge/Draw.io%20Desktop-v28.1.2-orange?logo=diagramsdotnet)](https://github.com/jgraph/drawio-desktop)
+[![Production Ready](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)](public/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 # 📊 incognia Diagrams Repository
 
-Repositorio para generar y servir diagramas PNG desde archivos draw.io para uso en Confluence.
+*Última modificación: 26 de septiembre de 2025, 11:49 (CST)*
+
+Repositorio para generar y servir diagramas PNG desde archivos draw.io para uso en Confluence con sistema de generación automática local y despliegue vía GitHub Pages.
 
 ## ⚠️ Justificación Técnica y Limitaciones
 
@@ -157,3 +173,46 @@ Para problemas:
 1. Verificar que draw.io desktop funciona: `drawio --version`
 2. Revisar output detallado del script de generación
 3. Comprobar que archivos `.drawio` son válidos XML
+
+---
+
+## Contacto y soporte
+
+### **Autor principal**
+
+**Rodrigo Ernesto Álvarez Aguilera**  
+Ingeniero DevOps - Infraestructura y Documentación técnica  
+Correo: [ralvarez@promad.com.mx](mailto:ralvarez@promad.com.mx)  
+Oficina: Ejército Nacional 57, Miguel Hidalgo  
+Teléfono: +52 (55) 7980-9502
+
+### **Cómo contribuir**
+
+1. **Fork** del repositorio
+2. **Crear branch** para nueva funcionalidad
+3. **Seguir estructura** existente de configuraciones
+4. **Documentar** completamente los cambios
+5. **Pull Request** con descripción detallada
+
+---
+
+**📅 Última actualización**: 26 de septiembre de 2025, 11:49 (CST)  
+**🏷️ Versión**: 1.0.0 - Sistema de diagramas completamente funcional  
+**📍 Infraestructura**: GitHub Pages + Scripts locales draw.io desktop  
+**🎯 Estado**: ✅ Sistema funcional con 3 diagramas de ejemplo desplegados
+
+## Licencia
+
+Esta documentación fue elaborada por el equipo de DevOps de Promad Business Solutions y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo [LICENSE](LICENSE).
+
+---
+
+**Elaborado por**: Rodrigo Ernesto Álvarez Aguilera (@incogniadev)  
+**Fecha**: 26 de septiembre de 2025, 11:49 CST  
+**Proyecto**: Sistema de diagramas automatizado para Confluence  
+**Estado**: ✅ Sistema completo funcional con generación local y despliegue automático  
+**Versión**: 1.0.0
+
+---
+
+*Copyright © 2025, Promad Business Solutions - Equipo DevOps*
