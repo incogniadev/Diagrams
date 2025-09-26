@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+# Note: No 'set -e' porque drawio devuelve exit code 1 aunque funcione
 
 # Colores para output
 RED='\033[0;31m'
@@ -33,8 +33,11 @@ for file in drawio/*.drawio; do
         
         echo -e "${YELLOW}📄 Procesando: $file${NC}"
         
-        # Convertir usando draw.io desktop
-        if drawio --export --format png --width 1200 --output "$output" "$file"; then
+        # Convertir usando draw.io desktop (ignorar exit code porque funciona pero devuelve 1)
+        drawio --export --format png --width 1200 --output "$output" "$file" || true
+        
+        # Verificar si el archivo se creó exitosamente
+        if [ -f "$output" ]; then
             echo -e "${GREEN}✅ Generado: $output${NC}"
             ((count++))
         else

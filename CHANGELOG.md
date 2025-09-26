@@ -23,3 +23,8 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.
 - refactor: eliminación de workflows complejos fallidos
 - refactor: simplificación de estructura de carpetas (drawio/ → scripts/ → public/)
 - refactor: separación clara entre generación local y despliegue automático
+
+### Sistema Completamente Funcional
+- feat: instalación exitosa de draw.io desktop v28.1.2 desde RPM oficial
+- fix: corrección de manejo de códigos de salida en script generate.sh para evitar terminación prematura
+- feat: generación exitosa de PNG desde archivos .drawio con página web completa y URLs para Confluence
