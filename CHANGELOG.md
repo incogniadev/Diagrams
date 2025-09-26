@@ -7,10 +7,19 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.
 
 ## [2025-09-26]
 
-- feat: configuración inicial del sistema de generación automatizada de diagramas con GitHub Actions y Pages para integración con Confluence
-- fix: simplificación del workflow de GitHub Actions para optimizar velocidad y confiabilidad del despliegue
-- fix: resolución de error de repositorio shallow y cambio a solución Docker más confiable
-- fix: creación de página estática básica para establecer GitHub Pages funcionando antes de implementar conversión
-- feat: implementación de conversión automática de archivos .drawio a PNG con visualización en página web y URLs para Confluence
-- fix: corrección del formato XML del archivo .drawio para compatibilidad completa con herramientas de conversión
-- fix: cambio a instalación directa de draw.io desktop para conversión confiable usando AppImage y xvfb
+### Implementación Final - Scripts Locales
+- feat: sistema simplificado con script local generate.sh para conversión confiable de .drawio a PNG
+- feat: workflow de GitHub Pages solo para despliegue estático desde carpeta public/
+- feat: página web generada automáticamente con preview de diagramas y URLs para Confluence
+- docs: documentación completa del sistema incluyendo intentos fallidos con GitHub Actions
+
+### Intentos Fallidos con GitHub Actions (documentados para referencia)
+- ❌ rlespinasse/drawio-export-action@v2: errores de repositorio shallow
+- ❌ Docker con draw.io desktop: exit code 8, problemas de permisos
+- ❌ AppImage directo: fallos en entorno headless de GitHub Actions
+- ✅ Conclusión: automatización en CI/CD es problemática, solución local es más confiable
+
+### Migración de Estructura
+- refactor: eliminación de workflows complejos fallidos
+- refactor: simplificación de estructura de carpetas (drawio/ → scripts/ → public/)
+- refactor: separación clara entre generación local y despliegue automático

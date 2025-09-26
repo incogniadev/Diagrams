@@ -1,114 +1,126 @@
-# 📊 incognia Diagrams Repository
+# 📊 Incognia Diagrams Repository
 
-Este repositorio contiene diagramas técnicos y de negocio para Incognia, generados automáticamente desde archivos draw.io.
+Repositorio para generar y servir diagramas PNG desde archivos draw.io para uso en Confluence.
 
-## 🌐 Sitio Web
+## ⚠️ Historial de Implementación
 
-Los diagramas están disponibles públicamente en: **https://incogniadev.github.io/Diagrams/**
+### Intento Fallido: GitHub Actions Automático
+Inicialmente intentamos implementar conversión automática con GitHub Actions usando:
+- `rlespinasse/drawio-export-action@v2` → Errores de repositorio shallow
+- Docker con draw.io desktop → Exit code 8, problemas de permisos
+- AppImage directo → Falló en entorno headless de GitHub Actions
 
-## 📁 Estructura del Repositorio
+**Conclusión**: La conversión automática de .drawio en GitHub Actions es problemática y poco confiable.
+
+### Solución Final: Scripts Locales
+Sistema simple y confiable usando draw.io desktop local + despliegue estático.
+
+## 🏗️ Estructura Simplificada
 
 ```
-src/
-├── architecture/     # Diagramas de arquitectura de sistemas
-├── business/         # Diagramas de procesos de negocio  
-├── infrastructure/   # Diagramas de infraestructura
-└── workflows/        # Diagramas de flujos de trabajo
+Diagrams/
+├── drawio/           # Archivos fuente .drawio
+├── scripts/          # Script de generación local
+├── public/           # PNG generados + página web
+└── .github/workflows/deploy.yaml  # Solo despliegue estático
 ```
 
-## 🚀 Cómo Usar
+## 🚀 Uso
 
-### 1. Agregar Nuevos Diagramas
+### 1. Prerrequisitos
+- Instalar [draw.io desktop](https://github.com/jgraph/drawio-desktop/releases)
+- Asegurar que `drawio` esté disponible en PATH
 
-1. Crea o edita archivos `.drawio` en la carpeta `src/` correspondiente
-2. Haz commit y push al repositorio
-3. GitHub Actions automáticamente:
-   - Convierte los archivos `.drawio` a PNG y SVG
-   - Actualiza el sitio web con los nuevos diagramas
+### 2. Agregar Diagramas
+- Coloca archivos `.drawio` en la carpeta `drawio/`
+- Usa nombres sin espacios: `system-architecture.drawio`
 
-### 2. Usar Diagramas en Confluence
+### 3. Generar PNG y Página Web
+```bash
+./scripts/generate.sh
+```
 
-Para insertar diagramas en Confluence, usa la URL directa:
+Este script:
+- ✅ Convierte todos los `.drawio` a PNG usando draw.io desktop
+- ✅ Genera página web con preview y URLs
+- ✅ Limpia archivos anteriores
+- ✅ Proporciona feedback visual del proceso
 
+### 4. Desplegar
+```bash
+git add .
+git commit -m "Update diagrams"
+git push
+```
+
+GitHub Pages despliega automáticamente desde la carpeta `public/`.
+
+## 🌐 URLs para Confluence
+
+Los diagramas están disponibles en:
+```
+https://incogniadev.github.io/Diagrams/nombre-diagrama.png
+```
+
+### Ejemplo de uso en Confluence:
 ```html
-<img src="https://incogniadev.github.io/Diagrams/architecture/system-overview.png" alt="System Overview" />
+<img src="https://incogniadev.github.io/Diagrams/example-system.png" alt="System Architecture" />
 ```
 
-### 3. Editar Diagramas
+## 📋 Ventajas de Esta Solución
 
-**Opción A: draw.io Web**
-1. Ve a https://app.diagrams.net/
-2. Abre desde GitHub (File → Open from → GitHub)
-3. Selecciona el archivo `.drawio` que quieres editar
-4. Guarda directamente en GitHub (File → Save as → GitHub)
+### ✅ Pros
+- **Confiable**: Usa draw.io desktop oficial local
+- **Simple**: Un script, un comando
+- **Control total**: No dependencias de terceros problemáticas
+- **Rápido**: Conversión local vs CI/CD lento
+- **Debugging**: Errores visibles inmediatamente
 
-**Opción B: draw.io Desktop**
-1. Clona el repositorio localmente
-2. Abre el archivo `.drawio` con draw.io Desktop
-3. Edita y guarda
-4. Haz commit y push
+### ❌ Contras 
+- **Manual**: Requiere ejecutar script localmente
+- **Dependencia**: Necesita draw.io desktop instalado
+- **No automático**: No convierte al hacer push
 
-## 🔄 Workflow Automático
+## 🔧 Solución de Problemas
 
-Cuando se detectan cambios en archivos `.drawio`:
+### "drawio command not found"
+```bash
+# Verificar instalación
+which drawio
+drawio --version
 
-1. **Conversión**: Los archivos se convierten a PNG (para web) y SVG (vectorial)
-2. **Generación**: Se crea automáticamente una página web con todos los diagramas
-3. **Despliegue**: Los diagramas se publican en GitHub Pages
-4. **URLs estables**: Cada diagrama tiene una URL pública fija
-
-## 📋 Convenciones de Nombres
-
-- Usa nombres descriptivos en inglés
-- Separar palabras con guiones: `system-architecture.drawio`
-- Prefijos por categoría:
-  - `arch-`: Arquitectura (`arch-microservices.drawio`)
-  - `flow-`: Flujos de trabajo (`flow-user-onboarding.drawio`)
-  - `infra-`: Infraestructura (`infra-aws-setup.drawio`)
-
-## 🛠️ Formatos Disponibles
-
-Cada diagrama se genera en dos formatos:
-- **PNG**: Para inserción en documentos y web (recomendado para Confluence)
-- **SVG**: Para máxima calidad y escalabilidad
-
-## 📖 URLs de Ejemplo
-
-```
-# Diagrama de arquitectura
-https://incogniadev.github.io/Diagrams/architecture/system-overview.png
-
-# Diagrama de flujo de trabajo  
-https://incogniadev.github.io/Diagrams/workflows/user-registration.png
-
-# Versión SVG
-https://incogniadev.github.io/Diagrams/svg/architecture/system-overview.svg
+# Si no está instalado, descargar desde:
+# https://github.com/jgraph/drawio-desktop/releases
 ```
 
-## ⚡ Inicio Rápido
+### Los PNG no se generan
+- Verificar formato de archivos `.drawio` (deben ser XML válido)
+- Probar abrir/guardar el archivo en draw.io desktop
+- Revisar permisos de escritura en carpeta `public/`
 
-1. Clona el repositorio:
-   ```bash
-   git clone git@github.com:incogniadev/Diagrams.git
-   ```
+### GitHub Pages no actualiza
+- Confirmar que el repo es público
+- Verificar que `public/` contiene `index.html` y archivos PNG
+- Revisar Actions tab para errores de despliegue
 
-2. Crea tu primer diagrama en `src/architecture/mi-sistema.drawio`
+## 📚 Lecciones Aprendidas
 
-3. Haz push:
-   ```bash
-   git add .
-   git commit -m "Add new system diagram"
-   git push
-   ```
+1. **GitHub Actions + draw.io = Problemático**: Múltiples intentos fallidos
+2. **Simplicidad > Automatización**: Herramientas locales son más confiables
+3. **Feedback inmediato**: Scripts locales permiten debugging fácil
+4. **Separación de responsabilidades**: Generación local + despliegue automático
 
-4. Ve la magia en: https://incogniadev.github.io/Diagrams/
+## 🚀 Workflow Recomendado
 
-## 🔐 Acceso
-
-- **Repositorio**: Privado (solo equipo Incognia)
-- **Diagramas generados**: Públicos vía GitHub Pages
-- **Edición**: Solo miembros autorizados del repositorio
+1. **Editar**: Usar draw.io desktop para crear/editar diagramas
+2. **Generar**: `./scripts/generate.sh` después de cambios
+3. **Verificar**: Abrir `public/index.html` localmente
+4. **Desplegar**: `git add . && git commit && git push`
+5. **Usar**: URLs en Confluence inmediatamente disponibles
 
 ## 📞 Soporte
 
-Para preguntas sobre el repositorio o problemas con la generación automática, contacta al equipo de DevOps.
+Para problemas:
+1. Verificar que draw.io desktop funciona: `drawio --version`
+2. Revisar output detallado del script de generación
+3. Comprobar que archivos `.drawio` son válidos XML
